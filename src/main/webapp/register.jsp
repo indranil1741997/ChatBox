@@ -101,7 +101,7 @@ success {
 <body>
 	<div class="div">
 		<h1>Fill Details</h1>
-		<form action="DatabaseConnection" method="post">
+		<form action="RegisterUser" method="post">
 			<h4>Email ID</h4>
 			<input type="text" name="email" />
 			<h4>Name</h4>
@@ -109,9 +109,8 @@ success {
 			<h4>Phone</h4>
 			<input type="text" name="phone" />
 			<h4>Password</h4>
-			<input type="text" name="psw"><br> <input type="submit"
-				value="SUBMIT" />
-
+			<input type="text" name="psw"><br> 
+			<input type="submit" value="SUBMIT" />
 		</form>
 	</div>
 </body>

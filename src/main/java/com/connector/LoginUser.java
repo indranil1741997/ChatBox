@@ -1,6 +1,7 @@
 package com.connector;
 
 import java.io.IOException;
+import java.io.PrintWriter;
 import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.ResultSet;
@@ -10,6 +11,7 @@ import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 
 /**
  * Servlet implementation class LoginUser
@@ -41,6 +43,11 @@ public class LoginUser extends HttpServlet {
 	 */
 	protected void doPost(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
+		
+		response.setContentType("text/html");  
+        PrintWriter out=response.getWriter();  
+        request.getRequestDispatcher("index.jsp").include(request, response);  
+		
 		try {
 			String email = request.getParameter("email");
 			String password = request.getParameter("psw");
@@ -49,14 +56,18 @@ public class LoginUser extends HttpServlet {
 			Connection connection = DriverManager.getConnection("jdbc:mysql://localhost:3306/chatbox", "root", "");
 			Statement statement = connection.createStatement();
 			ResultSet resultSet = statement.executeQuery("select * from user_details where email='" + email + "'");
-			if (resultSet.next()) {
-				if (resultSet.getString(4).equals(password))
-					response.sendRedirect(request.getContextPath() + "/welcome.jsp");
-				else
-					response.sendRedirect(request.getContextPath() + "/index.jsp");
+			if (resultSet.next() && resultSet.getString(4).equals(password)) {
+				HttpSession session = request.getSession();
+				session.setAttribute("user", email);
+				response.sendRedirect(request.getContextPath() + "/welcome.jsp");
+			} else {
+				out.print("Sorry, username or password error!");  
+	            request.getRequestDispatcher("index.jsp").include(request, response); 
+				//response.sendRedirect(request.getContextPath() + "/index.jsp");
 			}
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
+		out.close();
 	}
 }
