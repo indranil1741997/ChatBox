@@ -39,12 +39,12 @@ public class RegisterUser extends HttpServlet {
 	 */
 	protected void doPost(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
+		
+		String email = request.getParameter("email");
+		String name = request.getParameter("name");
+		String phone = request.getParameter("phone");
+		String password = request.getParameter("psw");
 		try {
-			String email = request.getParameter("email");
-			String name = request.getParameter("name");
-			String phone = request.getParameter("phone");
-			String password = request.getParameter("psw");
-
 			Class.forName("com.mysql.cj.jdbc.Driver");
 			Connection connection = DriverManager.getConnection("jdbc:mysql://localhost:3306/chatbox", "root",
 					"");

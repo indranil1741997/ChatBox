@@ -6,7 +6,7 @@
 <meta charset="ISO-8859-1">
 <title>Welcome</title>
 <style>
-table,th,td {
+table {
 	overflow-y: scroll;
 	height: 100px;
 	border: 1px solid black;
@@ -14,12 +14,6 @@ table,th,td {
 }
 </style>
 </head>
-
-<script type="text/javascript">
-	function generateConvId() {
-		arguments.
-	}
-</script>
 <body>
 	<h1>Hello User</h1>
 	<%
@@ -48,8 +42,10 @@ table,th,td {
 			<tr>
 			<td><%=resultSet.getString("name") %></td>
 			<td>
-				<input type="button" name="conv_id" value="<%=resultSet.getString("name") %>"
-				onclick="generateConvId(<%=resultSet.getString("name") %>)"/> 
+			<form action="ConversationId" method="post">
+				<input type="radio" name="conv_id" value="<%=resultSet.getString("name") %>"/>
+				<input type="submit" value="SUBMIT"/>  
+			</form>
 			</td>
 			</tr>
 	<%

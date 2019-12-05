@@ -10,7 +10,7 @@ import com.google.gson.JsonObject;
 import com.google.gson.JsonParser;
 
 public class OperationJSON {
-	private Statement connectToDatabase()
+	private static Statement connectToDatabase()
 	{
 		Statement statement = null;
 		try {
@@ -25,7 +25,7 @@ public class OperationJSON {
 		return statement;
 	}
 
-	private Object JSONToString(JsonObject o)
+	private static Object JSONToString(JsonObject o)
 	{
 		//To improvise
 		Gson gson = new Gson();
@@ -33,14 +33,14 @@ public class OperationJSON {
 		return javaObject;
 	}
 	
-	private JsonObject StringToJSON(String str)
+	private static JsonObject StringToJSON(String str)
 	{
 		JsonParser jsonParser = new JsonParser();
 		JsonObject jo = (JsonObject)jsonParser.parse(str);
 		return jo;
 	}
 	
-	public boolean addMessage(String str)
+	public static boolean addMessage(String str)
 	{
 		Statement statement = connectToDatabase();
 		JsonObject jsonObject = StringToJSON(str);
@@ -50,7 +50,7 @@ public class OperationJSON {
 		return false; //use to return statement.executeUpdate
 	}
 	
-	public Object fetchMessage()
+	public static Object fetchMessage(ResultSet resultSet)
 	{
 		Statement statement = connectToDatabase();
 		JsonObject jsonObject = null;

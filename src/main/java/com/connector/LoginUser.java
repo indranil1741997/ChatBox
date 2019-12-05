@@ -59,6 +59,7 @@ public class LoginUser extends HttpServlet {
 			if (resultSet.next() && resultSet.getString(4).equals(password)) {
 				HttpSession session = request.getSession();
 				session.setAttribute("user", email);
+				session.setAttribute("name", resultSet.getString(2));
 				response.sendRedirect(request.getContextPath() + "/welcome.jsp");
 			} else {
 				out.print("Sorry, username or password error!");  
