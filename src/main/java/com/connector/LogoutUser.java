@@ -33,7 +33,8 @@ public class LogoutUser extends HttpServlet {
 	 */
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		// TODO Auto-generated method stub
-		doGet(request, response);
+		request.getSession().invalidate();
+        response.sendRedirect(request.getContextPath() + "/index.jsp");
 	}
 
 }

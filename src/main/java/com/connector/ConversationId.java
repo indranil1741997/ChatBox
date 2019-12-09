@@ -13,6 +13,8 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
+import com.google.gson.JsonObject;
+
 /**
  * Servlet implementation class ConversationId
  */
@@ -51,14 +53,17 @@ public class ConversationId extends HttpServlet {
 				// Get conv_id and fetch the JSON string
 				ResultSet resultSet = statement
 						.executeQuery("select * from conversation where conv_id='" + resultSetTranx.getString(3) + "'");
+				request.setAttribute("conv_id", resultSetTranx.getString(3));
 				OperationJSON.fetchMessage(resultSet);
 			} else {
 				String convesation_id = createConversationId(sessionUsername, chatUsername);
 				statement.executeUpdate("insert into transaction values" + "('" + sessionUsername + "','" + chatUsername
 						+ "','" + convesation_id + "');");
-				statement.executeUpdate("insert into conversation value" + "(" + convesation_id + "','" + null + "');");
+				JsonObject json = null;
+				statement.executeUpdate("insert into conversation values" + "('" + convesation_id + "','" + json + "');");
 			}
-
+			
+			request.getRequestDispatcher("welcome.jsp").forward(request, response);
 		} catch (Exception e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();

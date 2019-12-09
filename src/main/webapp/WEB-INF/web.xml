@@ -40,6 +40,12 @@
  	<description></description>
  	<servlet-class>com.connector.LogoutUser</servlet-class>
  </servlet>
+ <servlet>
+ 	<servlet-name>ConversationId</servlet-name>
+ 	<display-name>ConversationId</display-name>
+ 	<description></description>
+ 	<servlet-class>com.connector.ConversationId</servlet-class>
+ </servlet>
   <servlet-mapping>
   	<servlet-name>SimpleForm</servlet-name>
   	<url-pattern>/SimpleForm</url-pattern>
@@ -59,5 +65,9 @@
   <servlet-mapping>
   	<servlet-name>LogoutUser</servlet-name>
   	<url-pattern>/LogoutUser</url-pattern>
+  </servlet-mapping>
+  <servlet-mapping>
+  	<servlet-name>ConversationId</servlet-name>
+  	<url-pattern>/ConversationId</url-pattern>
   </servlet-mapping>
 </web-app>
