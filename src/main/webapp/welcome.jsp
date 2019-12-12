@@ -67,7 +67,7 @@ table {
 					<td><%=resultSet.getString("name")%></td>
 					<td>
 						<form action="ConversationId" method="post">
-							<input type="radio" name="conv_id"
+							<input type="radio" name="usrTo"
 								value="<%=resultSet.getString("name")%>" /> <input
 								type="submit" value="SUBMIT" />
 						</form>
@@ -81,20 +81,15 @@ table {
 
 		<div class="floatRight">
 			<table>
+			<tr><th>Messages</th></tr>
 				<%
 					String conv_id = request.getAttribute("conv_id").toString();
 					resultSet = statement.executeQuery("select message from conversation where conv_id='" + conv_id + "'");
 					while (resultSet.next()) { //to complete
 				%>
 				<tr>
-					<td><%=resultSet.getString("name")%></td>
-					<td>
-						<form action="ConversationId" method="post">
-							<input type="radio" name="conv_id"
-								value="<%=resultSet.getString("name")%>" /> <input
-								type="submit" value="SUBMIT" />
-						</form>
-					</td>
+					<td><%=resultSet.getString("message")%></td>
+								
 				</tr>
 				<%
 					}
@@ -107,6 +102,12 @@ table {
 				%>
 			</table>
 		</div>
+	</div>
+	<div class="floatRight">
+		<form action="ConversationId" method="post">
+		<input type="text" name="newMessage"/>
+		<input type="submit" value="Send Message"/>
+		</form>
 	</div>
 	<div class="floatCorner">
 		<form action="LogoutUser" method="post">

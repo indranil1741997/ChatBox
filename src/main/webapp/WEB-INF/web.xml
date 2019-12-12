@@ -46,6 +46,12 @@
  	<description></description>
  	<servlet-class>com.connector.ConversationId</servlet-class>
  </servlet>
+ <servlet>
+ 	<servlet-name>AddMessage</servlet-name>
+ 	<display-name>AddMessage</display-name>
+ 	<description></description>
+ 	<servlet-class>com.connector.AddMessage</servlet-class>
+ </servlet>
   <servlet-mapping>
   	<servlet-name>SimpleForm</servlet-name>
   	<url-pattern>/SimpleForm</url-pattern>
@@ -69,5 +75,9 @@
   <servlet-mapping>
   	<servlet-name>ConversationId</servlet-name>
   	<url-pattern>/ConversationId</url-pattern>
+  </servlet-mapping>
+  <servlet-mapping>
+  	<servlet-name>AddMessage</servlet-name>
+  	<url-pattern>/AddMessage</url-pattern>
   </servlet-mapping>
 </web-app>

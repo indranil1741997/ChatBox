@@ -20,7 +20,6 @@ public class Test {
 		jsonObject1.addProperty("timestamp", timestamp.toString());
 		array.add(jsonObject1);
 		
-		JsonArray par =  array.getAsJsonArray();
-		System.out.println(par);
+		System.out.println(array);
 	}
 }

@@ -35,7 +35,7 @@ public class ConversationId extends HttpServlet {
 	protected void doPost(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
 		String sessionUsername = null;
-		String chatUsername = (String) request.getParameter("conv_id");
+		String chatUsername = (String) request.getParameter("userTo");
 		HttpSession session = request.getSession(false);
 		if (session != null)
 			sessionUsername = (String) session.getAttribute("name");
@@ -48,21 +48,27 @@ public class ConversationId extends HttpServlet {
 			Statement statement = connection.createStatement();
 			ResultSet resultSetTranx = statement.executeQuery("select * from transaction where" + " usr1='"
 					+ sessionUsername + "'and usr2='" + chatUsername + "'");
-
+			String conv_id = null;
 			if (resultSetTranx.next()) {
 				// Get conv_id and fetch the JSON string
-				ResultSet resultSet = statement
-						.executeQuery("select * from conversation where conv_id='" + resultSetTranx.getString(3) + "'");
 				request.setAttribute("conv_id", resultSetTranx.getString(3));
-				OperationJSON.fetchMessage(resultSet);
-			} else {
+				conv_id = resultSetTranx.getString(3);
+				// ResultSet resultSet = statement
+				// .executeQuery("select * from conversation where conv_id='" +
+				// resultSetTranx.getString(3) + "'");
+
+				// OperationJSON.fetchMessage(resultSet);
+			} else if (request.getParameter("newMessage") == null) {
 				String convesation_id = createConversationId(sessionUsername, chatUsername);
 				statement.executeUpdate("insert into transaction values" + "('" + sessionUsername + "','" + chatUsername
 						+ "','" + convesation_id + "');");
 				JsonObject json = null;
-				statement.executeUpdate("insert into conversation values" + "('" + convesation_id + "','" + json + "');");
+				statement.executeUpdate(
+						"insert into conversation values" + "('" + convesation_id + "','" + json + "');");
 			}
-			
+
+			if (request.getParameter("newMessage") != null)
+				OperationJSON.addMessage(request.getAttribute("newMessage").toString(), conv_id);
 			request.getRequestDispatcher("welcome.jsp").forward(request, response);
 		} catch (Exception e) {
 			// TODO Auto-generated catch block

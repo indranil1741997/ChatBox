@@ -30,7 +30,7 @@ public class OperationJSON {
 		return javaObject;
 	}
 
-	public static boolean addMessage(String text, ResultSet conv_id) {
+	public static boolean addMessage(String text, String conv_id) {
 
 		Statement statement = connectToDatabase();
 		Timestamp timestamp = new Timestamp(System.currentTimeMillis());
@@ -43,7 +43,7 @@ public class OperationJSON {
 		JsonArray message = new JsonArray();
 		try {
 			ResultSet resultSet = statement
-					.executeQuery("select message from conversation where conv_id='" + conv_id.getString(1) + "'");
+					.executeQuery("select message from conversation where conv_id='" + conv_id + "'");
 
 			// Optimization required
 			if (resultSet.next()) {
@@ -60,7 +60,7 @@ public class OperationJSON {
 			}
 
 			statement.executeUpdate(
-					"update conversation set message = '" + message + "' where conv_id='" + conv_id.getString(1) + "'");
+					"update conversation set message = '" + message + "' where conv_id='" + conv_id + "'");
 
 			return true; // use to return statement.executeUpdate
 		} catch (Exception e) {
