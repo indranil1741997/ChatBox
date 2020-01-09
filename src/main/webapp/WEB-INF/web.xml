@@ -1,83 +1,53 @@
-<!DOCTYPE web-app PUBLIC
- "-//Sun Microsystems, Inc.//DTD Web Application 2.3//EN"
- "http://java.sun.com/dtd/web-app_2_3.dtd" >
-
-<web-app>
+<?xml version="1.0" encoding="UTF-8"?>
+<web-app xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns="http://xmlns.jcp.org/xml/ns/javaee" 
+		 xsi:schemaLocation="http://xmlns.jcp.org/xml/ns/javaee 
+		 					http://xmlns.jcp.org/xml/ns/javaee/web-app_3_1.xsd" id="WebApp_ID" version="3.1">
+<welcome-file-list>
+	<welcome-file>index.jsp</welcome-file>
+</welcome-file-list>
   <display-name>Archetype Created Web Application</display-name>
   <servlet>
-  	<servlet-name>SimpleForm</servlet-name>
-  	<display-name>SimpleForm</display-name>
-  	<description></description>
-  	<servlet-class>SimpleForm</servlet-class>
-  </servlet>
-  <servlet>
-  	<servlet-name>DatabaseConnection</servlet-name>
-  	<display-name>DatabaseConnection</display-name>
-  	<description></description>
-  	<servlet-class>com.connector.DatabaseConnection</servlet-class>
-  </servlet>
-  <servlet>
-  	<servlet-name>LoginUser</servlet-name>
-  	<display-name>LoginUser</display-name>
-  	<description></description>
-  	<servlet-class>com.connector.LoginUser</servlet-class>
+  	<servlet-name>LoginServlet</servlet-name>
+  	<servlet-class>com.chatbox.servlet.LoginServlet</servlet-class>
   </servlet>
  <servlet>
-  	<servlet-name>RegisterUser</servlet-name>
-  	<display-name>RegisterUser</display-name>
-  	<description></description>
-  	<servlet-class>com.connector.RegisterUser</servlet-class>
+  	<servlet-name>RegisterServlet</servlet-name>
+  	<servlet-class>com.chatbox.servlet.RegisterServlet</servlet-class>
   </servlet>
  <servlet>
  	<servlet-name>UserProfile</servlet-name>
- 	<display-name>UserProfile</display-name>
- 	<description></description>
- 	<servlet-class>com.connector.UserProfile</servlet-class>
+ 	<servlet-class>com.tobeformatted.UserProfile</servlet-class>
  </servlet>
  <servlet>
- 	<servlet-name>LogoutUser</servlet-name>
- 	<display-name>LogoutUser</display-name>
- 	<description></description>
- 	<servlet-class>com.connector.LogoutUser</servlet-class>
+ 	<servlet-name>LogoutServlet</servlet-name>
+ 	<servlet-class>com.chatbox.servlet.LogoutServlet</servlet-class>
  </servlet>
  <servlet>
- 	<servlet-name>ConversationId</servlet-name>
- 	<display-name>ConversationId</display-name>
- 	<description></description>
- 	<servlet-class>com.connector.ConversationId</servlet-class>
+ 	<servlet-name>MessageServlet</servlet-name>
+ 	<servlet-class>com.chatbox.servlet.MessageServlet</servlet-class>
  </servlet>
  <servlet>
  	<servlet-name>AddMessage</servlet-name>
- 	<display-name>AddMessage</display-name>
- 	<description></description>
  	<servlet-class>com.connector.AddMessage</servlet-class>
  </servlet>
   <servlet-mapping>
-  	<servlet-name>SimpleForm</servlet-name>
-  	<url-pattern>/SimpleForm</url-pattern>
+  	<servlet-name>RegisterServlet</servlet-name>
+  	<url-pattern>/Register</url-pattern>
   </servlet-mapping>
   <servlet-mapping>
-  	<servlet-name>RegisterUser</servlet-name>
-  	<url-pattern>/RegisterUser</url-pattern>
-  </servlet-mapping>
-  <servlet-mapping>
-  	<servlet-name>LoginUser</servlet-name>
-  	<url-pattern>/LoginUser</url-pattern>
+  	<servlet-name>LoginServlet</servlet-name>
+  	<url-pattern>/Login</url-pattern>
   </servlet-mapping>
   <servlet-mapping>
   	<servlet-name>UserProfile</servlet-name>
   	<url-pattern>/UserProfile</url-pattern>
   </servlet-mapping>
   <servlet-mapping>
-  	<servlet-name>LogoutUser</servlet-name>
-  	<url-pattern>/LogoutUser</url-pattern>
+  	<servlet-name>LogoutServlet</servlet-name>
+  	<url-pattern>/Logout</url-pattern>
   </servlet-mapping>
   <servlet-mapping>
-  	<servlet-name>ConversationId</servlet-name>
-  	<url-pattern>/ConversationId</url-pattern>
-  </servlet-mapping>
-  <servlet-mapping>
-  	<servlet-name>AddMessage</servlet-name>
-  	<url-pattern>/AddMessage</url-pattern>
+  	<servlet-name>MessageServlet</servlet-name>
+  	<url-pattern>/message</url-pattern>
   </servlet-mapping>
 </web-app>

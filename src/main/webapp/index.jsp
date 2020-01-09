@@ -1,5 +1,3 @@
-<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
-
 <!DOCTYPE html>
 <html>
 <head>
@@ -78,12 +76,8 @@ span.psw {
 
 	<h2>Login Form</h2>
 
-	<form action="LoginUser" method="post">
-		<div class="imgcontainer">
-			<img src='<c:url value="/img/img_avatar2.png"/>' alt="Avatar"
-				class="avatar" />
-		</div>
-
+	<form action="Login" method="post">
+		
 		<div class="container">
 			<label for="uname"><b>User Name</b></label> <input type="text"
 				placeholder="Enter Username" name="email" required> <label

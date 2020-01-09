@@ -1,4 +1,4 @@
-<%@page import="com.mysql.cj.Session"%>
+
 <%@ page language="java" contentType="text/html; charset=ISO-8859-1"
 	pageEncoding="ISO-8859-1"%>
 <!DOCTYPE html>
@@ -66,7 +66,7 @@ table {
 				<tr>
 					<td><%=resultSet.getString("name")%></td>
 					<td>
-						<form action="ConversationId" method="post">
+						<form action="ConversationId?action=getmessage" method="post">
 							<input type="radio" name="usrTo"
 								value="<%=resultSet.getString("name")%>" /> <input
 								type="submit" value="SUBMIT" />
@@ -110,7 +110,7 @@ table {
 		</form>
 	</div>
 	<div class="floatCorner">
-		<form action="LogoutUser" method="post">
+		<form action="Logout" method="post">
 			<input type="submit" value="Logout">
 		</form>
 	</div>

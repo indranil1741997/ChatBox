@@ -101,7 +101,7 @@ success {
 <body>
 	<div class="div">
 		<h1>Fill Details</h1>
-		<form action="RegisterUser" method="post">
+		<form action="Register" method="post">
 			<h4>Email ID</h4>
 			<input type="text" name="email" />
 			<h4>Name</h4>
