@@ -1,6 +1,6 @@
-
-<%@ page language="java" contentType="text/html; charset=ISO-8859-1"
-	pageEncoding="ISO-8859-1"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/functions" prefix="fn" %>  
+<%@ page language="java" contentType="text/html; charset=ISO-8859-1" pageEncoding="ISO-8859-1"%>
 <!DOCTYPE html>
 <html>
 <head>
@@ -50,41 +50,34 @@ table {
 	<div class="container">
 		<div class="floatLeft">
 			<table>
+				<jsp:include page="/User" />
 				<tr>
 					<th>Available PPL</th>
 				</tr>
-				<%
-					try {
-						Class.forName("com.mysql.cj.jdbc.Driver");
-						java.sql.Connection connection = java.sql.DriverManager
-								.getConnection("jdbc:mysql://localhost:3306/chatbox", "root", "");
-						java.sql.Statement statement = connection.createStatement();
-						java.sql.ResultSet resultSet = statement.executeQuery(
-								"select name from user_details where email!='" + (String) session.getAttribute("user") + "'");
-						while (resultSet.next()) {
-				%>
+				<c:forEach begin="0" end="${fn:length(userList) - 1}" var="index">
 				<tr>
-					<td><%=resultSet.getString("name")%></td>
+					<td><c:out value="${userList[index]}"/></td>
 					<td>
-						<form action="ConversationId?action=getmessage" method="post">
+						<form action="Message?action=getMessage" method="post">
 							<input type="radio" name="usrTo"
-								value="<%=resultSet.getString("name")%>" /> <input
+								value="${userList[index]}" /> <input
 								type="submit" value="SUBMIT" />
 						</form>
 					</td>
 				</tr>
-				<%
-					}
-				%>
+				</c:forEach>
 			</table>
 		</div>
 
 		<div class="floatRight">
 			<table>
 			<tr><th>Messages</th></tr>
-				<%
+				<%try{
 					String conv_id = request.getAttribute("conv_id").toString();
-					resultSet = statement.executeQuery("select message from conversation where conv_id='" + conv_id + "'");
+					Class.forName("com.mysql.cj.jdbc.Driver");
+					java.sql.Connection connection = java.sql.DriverManager.getConnection("jdbc:mysql://localhost:3306/chatbox", "root", "");
+					java.sql.Statement statement = connection.createStatement();
+					java.sql.ResultSet resultSet = statement.executeQuery("select message from conversation where conv_id='" + conv_id + "'");
 					while (resultSet.next()) { //to complete
 				%>
 				<tr>

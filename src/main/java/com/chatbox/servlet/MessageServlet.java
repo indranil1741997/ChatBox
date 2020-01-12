@@ -45,7 +45,7 @@ public class MessageServlet extends HttpServlet {
 		String msg = (String) request.getAttribute("message");
 		
 		Messages message = new Messages(chatUsername, sessionUsername);
-		message.addMessage(msg);
+		//message.addMessage(msg);
 		
 		if(ADD_MESSAGE.equals(request.getParameter(ACTION))) {
 			messageService.addMessage(message);
