@@ -1,6 +1,10 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/functions" prefix="fn" %>  
+<%@page import="com.chatbox.servlet.UserServlet"%> 
+<%@page import="com.chatbox.servlet.MessageServlet"%> 
+<%@page import="java.util.ArrayList"%>
 <%@ page language="java" contentType="text/html; charset=ISO-8859-1" pageEncoding="ISO-8859-1"%>
+
 <!DOCTYPE html>
 <html>
 <head>
@@ -50,17 +54,20 @@ table {
 	<div class="container">
 		<div class="floatLeft">
 			<table>
-				<jsp:include page="/User" />
 				<tr>
 					<th>Available PPL</th>
 				</tr>
-				<c:forEach begin="0" end="${fn:length(userList) - 1}" var="index">
+				<%
+				@SuppressWarnings("unchecked")
+				ArrayList<String> userList =  (ArrayList<String>)request.getAttribute("userList"); 
+				%>
+				<c:forEach items="${userList}" var="user">
 				<tr>
-					<td><c:out value="${userList[index]}"/></td>
+					<td><c:out value="${user}"/></td>
 					<td>
 						<form action="Message?action=getMessage" method="post">
 							<input type="radio" name="usrTo"
-								value="${userList[index]}" /> <input
+								value="${user}" /> <input
 								type="submit" value="SUBMIT" />
 						</form>
 					</td>
@@ -72,33 +79,21 @@ table {
 		<div class="floatRight">
 			<table>
 			<tr><th>Messages</th></tr>
-				<%try{
-					String conv_id = request.getAttribute("conv_id").toString();
-					Class.forName("com.mysql.cj.jdbc.Driver");
-					java.sql.Connection connection = java.sql.DriverManager.getConnection("jdbc:mysql://localhost:3306/chatbox", "root", "");
-					java.sql.Statement statement = connection.createStatement();
-					java.sql.ResultSet resultSet = statement.executeQuery("select message from conversation where conv_id='" + conv_id + "'");
-					while (resultSet.next()) { //to complete
-				%>
-				<tr>
-					<td><%=resultSet.getString("message")%></td>
-								
-				</tr>
 				<%
-					}
-						resultSet.close();
-						statement.close();
-						connection.close();
-					} catch (Exception e) {
-						e.printStackTrace();
-					}
+				@SuppressWarnings("unchecked")
+				ArrayList<String> messageList =  (ArrayList<String>)request.getAttribute("message"); 
 				%>
+				<c:forEach items="${messageList}" var="msg">
+				<tr>
+					<td><c:out value="${msg}"/></td>
+				</tr>
+				</c:forEach>
 			</table>
 		</div>
 	</div>
 	<div class="floatRight">
-		<form action="ConversationId" method="post">
-		<input type="text" name="newMessage"/>
+		<form action="Message?action=addMessage" method="post">
+		<input type="text" name="message"/>
 		<input type="submit" value="Send Message"/>
 		</form>
 	</div>

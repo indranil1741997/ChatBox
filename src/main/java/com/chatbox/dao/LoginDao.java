@@ -1,6 +1,5 @@
 package com.chatbox.dao;
 
-import java.sql.Connection;
 import java.sql.ResultSet;
 import java.sql.Statement;
 
@@ -10,8 +9,7 @@ public class LoginDao extends DatabaseCommunication {
 
 	public boolean verifyLogin(String email, String password, SessionInfo sessionInfo) {
 		try {
-			Connection connection = getConnection();
-			Statement statement = connection.createStatement();
+			Statement statement = getConnection().createStatement();
 			ResultSet resultSet = statement.executeQuery("select * from user_details where email='" + email + "'");
 			if (resultSet.next() && resultSet.getString(4).equals(password)) {
 				sessionInfo.setEmail(email);

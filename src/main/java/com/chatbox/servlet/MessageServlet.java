@@ -24,6 +24,7 @@ public class MessageServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
 
 	private MessageService messageService;
+	private Messages message;
 	
 	public MessageServlet() {
 		super();
@@ -42,16 +43,19 @@ public class MessageServlet extends HttpServlet {
 		
 		String chatUsername = (String) request.getParameter("userTo");
 		String sessionUsername = (String) session.getAttribute("name");
-		String msg = (String) request.getAttribute("message");
-		
-		Messages message = new Messages(chatUsername, sessionUsername);
-		//message.addMessage(msg);
+
+		String conv_id = messageService.getConversationId(chatUsername, sessionUsername);
+		message = null;
 		
 		if(ADD_MESSAGE.equals(request.getParameter(ACTION))) {
-			messageService.addMessage(message);
+			String msg = (String) request.getAttribute("message");
+			messageService.addMessage(msg, conv_id);
 		}
 		else if(GET_MESSAGE.equals(request.getParameter(ACTION))) {
-			messageService.getMessage(chatUsername, sessionUsername);
+			message = messageService.getMessage(conv_id);
 		}
+		
+		request.setAttribute("message", messageService.populateMessageList(message));
+		request.getRequestDispatcher("welcome.jsp").forward(request, response);
 	}
 }

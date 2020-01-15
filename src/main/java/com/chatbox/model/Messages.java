@@ -10,6 +10,10 @@ public class Messages {
 	private String sessionUsername;
 	private List<Message> message = new ArrayList<>();
 	
+	public Messages()
+	{
+		super();
+	}
 	
 	public Messages(String chatUsername, String sessionUsername) {
 		super();
@@ -45,7 +49,7 @@ public class Messages {
 		this.message.remove(message);
 	}
 
-	private class Message{
+	protected class Message{
 		
 		private String message;
 		private String timestamp;
@@ -58,6 +62,10 @@ public class Messages {
 		
 		public String getMessage() {
 			return message;
+		}
+
+		public String getTimestamp() {
+			return timestamp;
 		}
 	}
 	
