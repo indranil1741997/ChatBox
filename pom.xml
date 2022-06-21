@@ -14,7 +14,7 @@
         <jstl.version>1.2</jstl.version>
         <jackson.version>1.9.10</jackson.version>
         <spring.version>4.3.2.RELEASE</spring.version>
-        <mysql.version>8.0.17</mysql.version>
+        <mysql.version>8.0.28</mysql.version>
     </properties>
   <dependencies>
     
